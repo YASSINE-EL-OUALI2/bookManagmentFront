@@ -1,0 +1,38 @@
+<h2>Books List</h2>
+<div class="row">
+  <button class="btn btn-primary col-2" routerLink="/addBook"> Add Book</button>
+</div>
+<br>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">Category</th>
+      <th scope="col">Publication Date</th>
+      <th scope="col">ISBN</th>
+      <th scope="col">Publisher</th>
+      <th scope="col">Price</th>
+      <th scope="col">Availability</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of listBooks; let i = index">
+      <th scope="row">{{i+1}}</th>
+      <td>{{item.title}}</td>
+      <td>{{(item.author)?item.author.authorName:""}}</td>
+      <td>{{(item.category)?item.category.categoryName:""}}</td>
+      <td>{{item.publicationYear}}</td>
+      <td>{{item.isbn}}</td>
+      <td>{{item.publisherName}}</td>
+      <td>{{item.price}}</td>
+      <td>{{(item.quantityAvailable != 0 ) ? "In Stock" : "Out of Stock"}}</td>
+      <td><button class="btn btn-primary" routerLink="/editBook/{{item.bookId}}"><i class="fa-solid fa-pen-to-square"
+            title="Edit"></i></button>
+        <button class="btn btn-danger"><i class="fa-solid fa-trash" title="Delete"></i></button>
+      </td>
+    </tr>
+  </tbody>
+</table>
