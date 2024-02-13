@@ -3,6 +3,9 @@
   <button class="btn btn-primary col-2" routerLink="/addAuthor"> Add Author</button>
 </div>
 <br>
+<div class="row col-3">
+  <input type="text" [(ngModel)]="searchText" class="form-control" placeholder="Search by Author's name">
+</div>
 <table class="table">
   <thead>
     <tr>
@@ -13,7 +16,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of listAuthors; let i = index">
+    <tr *ngFor="let item of listAuthors | authorFilter: searchText; let i = index">
       <th scope="row">{{i+1}}</th>
       <td>{{item.authorName}}</td>
       <td>{{item.biography}}</td>

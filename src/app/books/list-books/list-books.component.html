@@ -3,13 +3,23 @@
   <button class="btn btn-primary col-2" routerLink="/addBook"> Add Book</button>
 </div>
 <br>
+<div class="row col-5">
+  <input type="text" [(ngModel)]="searchText" class="form-control"
+    placeholder="Search by Title, Author, Category, ISBN, Publisher">
+</div>
 <table class="table">
   <thead>
     <tr>
       <th scope="col"></th>
-      <th scope="col">Title</th>
-      <th scope="col">Author</th>
-      <th scope="col">Category</th>
+      <th scope="col" (click)="sort('title')">Title <span *ngIf="colName === 'title'" class="sort-indicator">
+          {{ reverse ? '▼' : '▲' }}
+        </span></th>
+      <th scope="col" (click)="sort('author.authorName')">Author <span *ngIf="colName === 'author.authorName'"
+          class="sort-indicator">
+          {{ reverse ? '▼' : '▲' }} </span></th>
+      <th scope="col" (click)="sort('category.categoryName')">Category <span *ngIf="colName === 'category.categoryName'"
+          class="sort-indicator">
+          {{ reverse ? '▼' : '▲' }} </span></th>
       <th scope="col">Publication Date</th>
       <th scope="col">ISBN</th>
       <th scope="col">Publisher</th>
@@ -19,7 +29,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of listBooks; let i = index">
+    <tr *ngFor="let item of listBooks | bookFilter: searchText; let i = index">
       <th scope="row">{{i+1}}</th>
       <td>{{item.title}}</td>
       <td>{{(item.author)?item.author.authorName:""}}</td>

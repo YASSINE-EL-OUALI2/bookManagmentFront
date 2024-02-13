@@ -3,22 +3,25 @@
   <button class="btn btn-primary col-2" routerLink="/addInventory"> Add Inventory</button>
 </div>
 <br>
+<div class="row col-3">
+  <input type="text" [(ngModel)]="searchText" class="form-control" placeholder="Search by Inventory's shelf location">
+</div>
 <table class="table">
   <thead>
     <tr>
       <th scope="col"></th>
-      <th scope="col">Date Added</th>
       <th scope="col">Shelf Location</th>
       <th scope="col">Condition</th>
+      <th scope="col">Date Added</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of listInventories; let i = index">
+    <tr *ngFor="let item of listInventories | inventoryFilter: searchText; let i = index">
       <th scope="row">{{i+1}}</th>
-      <td>{{item.dateAdded}}</td>
       <td>{{item.shelfLocation}}</td>
       <td>{{item.condition}}</td>
+      <td>{{item.dateAdded}}</td>
       <td><button class="btn btn-primary" routerLink="/editInventory/{{item.inventoryId}}"><i
             class="fa-solid fa-pen-to-square" title="Edit"></i></button>
         <button class="btn btn-danger"><i class="fa-solid fa-trash" title="Delete"></i></button>

@@ -23,6 +23,11 @@ import { AddInventoryComponent } from './inventories/add-inventory/add-inventory
 import { AddCategoryComponent } from './categories/add-category/add-category.component';
 import { AddBookComponent } from './books/add-book/add-book.component';
 import { AddAuthorComponent } from './authors/add-author/add-author.component';
+import { BookFilterPipe } from './pipes/books/book-filter.pipe';
+import { CategoryFilterPipe } from './pipes/categories/category-filter.pipe';
+import { InventoryFilterPipe } from './pipes/inventories/inventory-filter.pipe';
+import { AuthorFilterPipe } from './pipes/authors/author-filter.pipe';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -40,15 +45,20 @@ import { AddAuthorComponent } from './authors/add-author/add-author.component';
     AddInventoryComponent,
     AddCategoryComponent,
     AddBookComponent,
-    AddAuthorComponent
+    AddAuthorComponent,
+    BookFilterPipe,
+    CategoryFilterPipe,
+    InventoryFilterPipe,
+    AuthorFilterPipe
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
-  ],
+    FormsModule,
+    NgbModule
+    ],
   providers: [BooksService, AuthorsService, CategoriesService, InventoriesService],
   bootstrap: [AppComponent]
 })

@@ -5,32 +5,37 @@
 
     <div class="row g-3 align-items-center">
       <div class="col-2">
-        <label for="dateAdded">Date Added:</label>
-      </div>
-      <div class="col-3">
-        <input type="text" id="dateAdded" class="form-control" name="dateAdded" required><br>
-      </div>
-
-    </div>
-    <div class="row g-3 align-items-center">
-      <div class="col-2">
         <label for="shelfLocation">Shelf Location:</label>
       </div>
       <div class="col-3">
-        <input type="text" id="shelfLocation" class="form-control" name="shelfLocation" required><br>
+        <input type="text" id="shelfLocation" class="form-control" name="shelfLocation" required>
       </div>
 
-    </div>
+    </div><br>
     <div class="row g-3 align-items-center">
       <div class="col-2">
         <label for="condition">Condition:</label>
       </div>
       <div class="col-3">
-        <input type="text" id="condition" class="form-control" name="condition" required><br>
+        <input type="text" id="condition" class="form-control" name="condition" required>
       </div>
 
     </div>
 
+    <br>
+
+    <div class="row g-3 align-items-center">
+      <div class="col-2">
+        <label for="dateAdded">Date Added:</label>
+      </div>
+      <div class="col-3">
+        <div class="input-group mb-3">
+          <input type="text" id="dateAdded" class="form-control" name="dateAdded" [(ngModel)]="inventory.dateAdded"
+            ngbDatepicker #d="ngbDatepicker" required>
+          <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+        </div>
+      </div>
+    </div>
     <br>
     <div class="row">
       <div class="offset-3">

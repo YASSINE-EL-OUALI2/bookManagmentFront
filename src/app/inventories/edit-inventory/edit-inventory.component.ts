@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Inventory } from 'src/app/models/Inventory';
 
 @Component({
   selector: 'app-edit-inventory',
@@ -7,6 +8,13 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 })
 export class EditInventoryComponent implements OnInit, OnDestroy {
 
+  inventory: Inventory={
+    inventoryId: 0,
+    dateAdded: '',
+    shelfLocation: '',
+    condition: '',
+    books: []
+  };
 
   constructor() {
 
