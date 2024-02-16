@@ -21,10 +21,10 @@
       <th scope="row">{{i+1}}</th>
       <td>{{item.shelfLocation}}</td>
       <td>{{item.condition}}</td>
-      <td>{{item.dateAdded}}</td>
+      <td>{{item.dateAdded | date:"yyyy-MM-dd"}}</td>
       <td><button class="btn btn-primary" routerLink="/editInventory/{{item.inventoryId}}"><i
             class="fa-solid fa-pen-to-square" title="Edit"></i></button>
-        <button class="btn btn-danger"><i class="fa-solid fa-trash" title="Delete"></i></button>
+        <button class="btn btn-danger" (click)="deleteInventory(item.inventoryId)"><i class="fa-solid fa-trash" title="Delete"></i></button>
       </td>
     </tr>
   </tbody>

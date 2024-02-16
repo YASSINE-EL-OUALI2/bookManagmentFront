@@ -1,5 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Authors } from 'src/app/models/Authors';
 import { Books } from 'src/app/models/books';
@@ -12,6 +13,7 @@ import { AuthorsService } from 'src/app/services/authors/authors.service';
 })
 export class EditAuthorsComponent implements OnInit, OnDestroy {
 
+  @ViewChild("editAuthorForm") editAuthorForm: NgForm;
   author: Authors = {
     authorId: 0,
     authorName: '',
@@ -22,8 +24,10 @@ export class EditAuthorsComponent implements OnInit, OnDestroy {
   listBooks: Books[];
   subscriptionParams: Subscription;
   subscription: Subscription;
+  updateSubscription: Subscription;
   constructor(private authorsServ: AuthorsService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private router: Router) {
 
   }
   ngOnInit() {
@@ -38,10 +42,17 @@ export class EditAuthorsComponent implements OnInit, OnDestroy {
 
 
   onSubmit() {
-
+    this.updateSubscription = this.authorsServ.updateAuthor(this.author).subscribe(response=>{
+      console.log("author updated" + response);
+      this.router.navigateByUrl("/authors");
+    });
   }
   ngOnDestroy() {
-
+    this.subscription.unsubscribe();
+    this.subscriptionParams.unsubscribe();
+    if(this.updateSubscription){
+      this.updateSubscription.unsubscribe();
+    }
   }
 
 }

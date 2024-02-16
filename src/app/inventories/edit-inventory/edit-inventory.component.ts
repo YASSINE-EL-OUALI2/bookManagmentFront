@@ -10,7 +10,7 @@ export class EditInventoryComponent implements OnInit, OnDestroy {
 
   inventory: Inventory={
     inventoryId: 0,
-    dateAdded: '',
+    dateAdded: new Date(),
     shelfLocation: '',
     condition: '',
     books: []
@@ -24,7 +24,7 @@ export class EditInventoryComponent implements OnInit, OnDestroy {
 
   }
   onSubmit() {
-
+    console.log(this.inventory);
   }
 
   ngOnDestroy() {

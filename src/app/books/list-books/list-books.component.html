@@ -34,14 +34,15 @@
       <td>{{item.title}}</td>
       <td>{{(item.author)?item.author.authorName:""}}</td>
       <td>{{(item.category)?item.category.categoryName:""}}</td>
-      <td>{{item.publicationYear}}</td>
+      <td>{{item.publicationDate | date:"yyyy-MM-dd"}}</td>
       <td>{{item.isbn}}</td>
       <td>{{item.publisherName}}</td>
       <td>{{item.price}}</td>
-      <td>{{(item.quantityAvailable != 0 ) ? "In Stock" : "Out of Stock"}}</td>
+      <td>{{(item.quantityAvailable != 0 ) ?(item.quantityAvailable < 5)?"Nearly Out of Stock": "In Stock"
+          : "Out of Stock" }}</td>
       <td><button class="btn btn-primary" routerLink="/editBook/{{item.bookId}}"><i class="fa-solid fa-pen-to-square"
             title="Edit"></i></button>
-        <button class="btn btn-danger"><i class="fa-solid fa-trash" title="Delete"></i></button>
+        <button class="btn btn-danger" (click)="deleteBook(item.bookId)"><i class="fa-solid fa-trash" title="Delete"></i></button>
       </td>
     </tr>
   </tbody>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Books } from '../../models/books';
+import { Books } from 'src/app/models/books';
 
 
 @Injectable({
@@ -22,7 +22,9 @@ export class BooksService {
   }
   addBook(book: Books): Observable<Books> {
     const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
     };
     return this.http.post<Books>(this.apiUrl + "/addbook", book, httpOptions);
   }
@@ -33,4 +35,19 @@ export class BooksService {
     };
     return this.http.put<Books>(this.apiUrl + "/updatebook", book, httpOptions);
   }
+
+  checkThreshold(bookId: number) {
+    return this.http.get(this.apiUrl + "/checkthreshold?id=" + bookId, { responseType: 'text' });
+  }
+
+  deleteBook(book: Books) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      body: book
+    };
+    return this.http.delete(this.apiUrl + "/deletebook", httpOptions);
+  }
+
 }

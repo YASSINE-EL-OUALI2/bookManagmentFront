@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Authors } from 'src/app/models/Authors';
 
 @Component({
@@ -8,6 +9,7 @@ import { Authors } from 'src/app/models/Authors';
 })
 export class AddAuthorComponent {
 
+  @ViewChild("addAuthorForm") addAuthorForm: NgForm;
   author: Authors={
     authorId: 0,
     authorName: '',

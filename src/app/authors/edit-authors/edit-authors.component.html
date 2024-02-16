@@ -1,12 +1,18 @@
 <h2>Edit Author</h2>
 <div class="container">
-  <form (ngSubmit)="onSubmit()">
+  <form #editBookForm="ngForm" (ngSubmit)="onSubmit()">
     <div class="row g-3 align-items-center">
       <div class="col-2">
         <label for="authorName">Author Name:</label>
       </div>
       <div class="col-3">
-        <input type="text" id="authorName" class="form-control" name="authorName" [(ngModel)]="author.authorName" required><br>
+        <div class="input-group mb-3">
+          <input type="text" id="authorName" class="form-control"
+            [class.is-invalid]="authorName.invalid && (authorName.dirty || authorName.touched)" name="authorName"
+            [(ngModel)]="author.authorName" #authorName="ngModel" required>
+          <div *ngIf="authorName.invalid && (authorName.dirty || authorName.touched)" class="invalid-feedback"> Field is
+            required.</div>
+        </div>
       </div>
     </div>
     <br>
@@ -15,13 +21,20 @@
         <label for="biography">Biography:</label>
       </div>
       <div class="col-3">
-        <textarea id="biography" name="biography" class="form-control" rows="4" [(ngModel)]="author.biography" required></textarea><br>
+        <div class="input-group mb-3">
+          <textarea id="biography" name="biography" class="form-control"
+            [class.is-invalid]="biography.invalid && (biography.dirty || biography.touched)" rows="4"
+            [(ngModel)]="author.biography" #biography="ngModel" required></textarea>
+          <div *ngIf="biography.invalid && (biography.dirty || biography.touched)" class="invalid-feedback"> Field is
+            required.</div>
+
+        </div>
       </div>
     </div>
     <br>
     <div class="row">
       <div class="offset-3">
-        <button type="button" class="btn btn-success col-1" (click)="onSubmit()"><i
+        <button type="button" class="btn btn-success col-1" [disabled]="editBookForm.invalid" (click)="onSubmit()"><i
             class="fa-solid fa-check"></i>Save</button>
         <button type="button" routerLink="/" class="btn btn-danger col-1"><i
             class="fa-solid fa-xmark"></i>Cancel</button>
