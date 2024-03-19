@@ -1,5 +1,5 @@
 <h2>Inventories List</h2>
-<div class="row">
+<div class="row" *ngIf="storageServ.getRole().includes('ROLE_ADMIN') || storageServ.getRole().includes('ROLE_MODERATOR')">
   <button class="btn btn-primary col-2" routerLink="/addInventory"> Add Inventory</button>
 </div>
 <br>
@@ -13,7 +13,7 @@
       <th scope="col">Shelf Location</th>
       <th scope="col">Condition</th>
       <th scope="col">Date Added</th>
-      <th scope="col">Actions</th>
+      <th scope="col" *ngIf="storageServ.getRole().includes('ROLE_ADMIN')">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -22,7 +22,7 @@
       <td>{{item.shelfLocation}}</td>
       <td>{{item.condition}}</td>
       <td>{{item.dateAdded | date:"yyyy-MM-dd"}}</td>
-      <td><button class="btn btn-primary" routerLink="/editInventory/{{item.inventoryId}}"><i
+      <td *ngIf="storageServ.getRole().includes('ROLE_ADMIN')"><button class="btn btn-primary" routerLink="/editInventory/{{item.inventoryId}}"><i
             class="fa-solid fa-pen-to-square" title="Edit"></i></button>
         <button class="btn btn-danger" (click)="deleteInventory(item.inventoryId)"><i class="fa-solid fa-trash" title="Delete"></i></button>
       </td>

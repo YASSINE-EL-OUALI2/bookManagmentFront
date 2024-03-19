@@ -1,14 +1,20 @@
 <h2>Edit Inventory</h2>
 
 <div class="container">
-  <form (ngSubmit)="onSubmit()">
+  <form #editInventoryForm="ngForm" (ngSubmit)="onSubmit()">
 
     <div class="row g-3 align-items-center">
       <div class="col-2">
         <label for="shelfLocation">Shelf Location:</label>
       </div>
       <div class="col-3">
-        <input type="text" id="shelfLocation" class="form-control" name="shelfLocation" required>
+        <div class="input-group mb-3">
+          <input type="text" id="shelfLocation" class="form-control" [class.is-invalid]="shelfLocation.invalid && (shelfLocation.dirty || shelfLocation.touched)"
+            #shelfLocation="ngModel" [(ngModel)]="inventory.shelfLocation" name="shelfLocation" required>
+          <div *ngIf="shelfLocation.invalid && (shelfLocation.dirty || shelfLocation.touched)" class="invalid-feedback">
+            Field is required.
+          </div>
+        </div>
       </div>
 
     </div><br>
@@ -17,7 +23,14 @@
         <label for="condition">Condition:</label>
       </div>
       <div class="col-3">
-        <input type="text" id="condition" class="form-control" name="condition" required>
+        <div class="input-group mb-3">
+          <input type="text" id="condition" class="form-control" [class.is-invalid]="condition.invalid && (condition.dirty || condition.touched)" #condition="ngModel"
+            name="condition" [(ngModel)]="inventory.condition" required>
+          <div *ngIf="condition.invalid && (condition.dirty || condition.touched)" class="invalid-feedback">
+            Field is required.
+          </div>
+
+        </div>
       </div>
 
     </div>
@@ -30,14 +43,19 @@
       </div>
       <div class="col-3">
         <div class="input-group mb-3">
-          <input type="text" id="dateAdded" class="form-control" name="dateAdded" [(ngModel)]="inventory.dateAdded"  required>
+          <input type="date" id="dateAdded" [class.is-invalid]="dateAdded.invalid && (dateAdded.dirty || dateAdded.touched)" #dateAdded="ngModel"
+            class="form-control" name="dateAdded" [(ngModel)]="inventory.dateAdded" required>
+          <div *ngIf="dateAdded.invalid && (dateAdded.dirty || dateAdded.touched)" class="invalid-feedback">
+            Field is required.
+          </div>
+
         </div>
       </div>
     </div>
     <br>
     <div class="row">
       <div class="offset-3">
-        <button type="button" class="btn btn-success col-1" (click)="onSubmit()"><i
+        <button type="button" class="btn btn-success col-1" [disabled]="editInventoryForm.invalid" (click)="onSubmit()"><i
             class="fa-solid fa-check"></i>Save</button>
         <button type="button" routerLink="/" class="btn btn-danger col-1"><i
             class="fa-solid fa-xmark"></i>Cancel</button>

@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Inventory } from 'src/app/models/Inventory';
@@ -9,8 +10,9 @@ import { InventoriesService } from 'src/app/services/inventories/inventories.ser
   templateUrl: './add-inventory.component.html',
   styleUrls: ['./add-inventory.component.css']
 })
-export class AddInventoryComponent  implements OnInit, OnDestroy {
+export class AddInventoryComponent implements OnDestroy {
 
+  @ViewChild("addInventoryForm") addInventoryForm: NgForm;
   inventory: Inventory = {
     inventoryId: 0,
     dateAdded: null,
@@ -21,21 +23,20 @@ export class AddInventoryComponent  implements OnInit, OnDestroy {
   subscriptionAdd: Subscription;
 
   constructor(private inventoryServ: InventoriesService,
-    private router: Router){}
+    private router: Router) { }
 
-  ngOnInit() {
-  }
 
-  onSubmit(){
-    this.subscriptionAdd = this.inventoryServ.addInventory(this.inventory).subscribe(response=>{
-      console.log("inventory added succesfully. " + response);
+  onSubmit() {
+    this.subscriptionAdd = this.inventoryServ.addInventory(this.inventory).subscribe(() => {
       this.router.navigateByUrl("/inventories");
     });
 
   }
 
   ngOnDestroy() {
-    this.subscriptionAdd.unsubscribe();
+    if (this.subscriptionAdd) {
+      this.subscriptionAdd.unsubscribe();
+    }
   }
 
 }

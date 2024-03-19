@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { Inventory } from 'src/app/models/Inventory';
 import { InventoriesService } from 'src/app/services/inventories/inventories.service';
 import { InventoryFilterPipe } from './../../pipes/inventories/inventory-filter.pipe';
+import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
   selector: 'app-inventories',
@@ -19,7 +20,8 @@ export class InventoriesComponent implements OnInit, OnDestroy {
   inventoryDel: Inventory;
 
 
-  constructor(private inventoriesServ: InventoriesService) {
+  constructor(private inventoriesServ: InventoriesService,
+    protected storageServ: StorageService) {
   }
 
   ngOnInit() {

@@ -5,6 +5,8 @@ import { Books } from 'src/app/models/books';
 import { OnDestroy } from '@angular/core';
 import { BookFilterPipe } from 'src/app/pipes/books/book-filter.pipe';
 import { formatDate } from '@angular/common';
+import { StorageService } from 'src/app/services/storage/storage.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-books',
@@ -22,7 +24,8 @@ export class ListBooksComponent implements OnInit, OnDestroy {
   //sorting properties
   colName: string = "";
   reverse: boolean = false;
-  constructor(private booksServ: BooksService) {
+  constructor(private booksServ: BooksService,
+    protected storageServ: StorageService) {
   }
 
   ngOnInit() {
@@ -34,7 +37,6 @@ export class ListBooksComponent implements OnInit, OnDestroy {
 
   //delete Book function
   deleteBook(bookId: number) {
-    console.log(bookId);
     this.listBooks.map(book => {
       if (book.bookId == bookId) {
         this.bookDel = book;

@@ -1,5 +1,5 @@
 <h2>Books List</h2>
-<div class="row">
+<div class="row" *ngIf="storageServ.getRole().includes('ROLE_ADMIN') || storageServ.getRole().includes('ROLE_MODERATOR')">
   <button class="btn btn-primary col-2" routerLink="/addBook"> Add Book</button>
 </div>
 <br>
@@ -25,7 +25,7 @@
       <th scope="col">Publisher</th>
       <th scope="col">Price</th>
       <th scope="col">Availability</th>
-      <th scope="col">Actions</th>
+      <th scope="col" *ngIf="storageServ.getRole().includes('ROLE_ADMIN')">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -40,7 +40,7 @@
       <td>{{item.price}}</td>
       <td>{{(item.quantityAvailable != 0 ) ?(item.quantityAvailable < 5)?"Nearly Out of Stock": "In Stock"
           : "Out of Stock" }}</td>
-      <td><button class="btn btn-primary" routerLink="/editBook/{{item.bookId}}"><i class="fa-solid fa-pen-to-square"
+      <td *ngIf="storageServ.getRole().includes('ROLE_ADMIN')"><button class="btn btn-primary" routerLink="/editBook/{{item.bookId}}"><i class="fa-solid fa-pen-to-square"
             title="Edit"></i></button>
         <button class="btn btn-danger" (click)="deleteBook(item.bookId)"><i class="fa-solid fa-trash" title="Delete"></i></button>
       </td>

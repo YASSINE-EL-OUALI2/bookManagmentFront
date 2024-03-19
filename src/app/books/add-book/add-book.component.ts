@@ -77,11 +77,9 @@ export class AddBookComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    console.log(this.book);
     if (this.addBookForm.valid) {
       this.book.publicationDate = formatDate(this.book.publicationDate, "yyyy-MM-dd", "en-US");
-      this.createSubscription = this.booksServ.addBook(this.book).subscribe(response => {
-        console.log("book created successfully. ", response);
+      this.createSubscription = this.booksServ.addBook(this.book).subscribe(() => {
         this.router.navigateByUrl("/books");
       });
     }

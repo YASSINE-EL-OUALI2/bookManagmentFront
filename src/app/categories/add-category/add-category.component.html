@@ -1,28 +1,40 @@
 <h2>Add Category</h2>
 <div class="container">
-  <form (ngSubmit)="onSubmit()">
+  <form #addCategoryForm="ngForm" (ngSubmit)="onSubmit()">
 
     <div class="row g-3 align-items-center">
       <div class="col-2"> <label for="categoryName">Category Name:</label>
       </div>
-      <div class="col-3"> <input type="text" class="form-control" id="categoryName" name="categoryName" required><br>
+      <div class="col-3">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" [class.is-invalid]="name.invalid && (name.dirty || name.touched)"
+            #name="ngModel" [(ngModel)]="category.categoryName" id="categoryName" name="categoryName" required>
+          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="invalid-feedback"> Field is required.
+          </div>
+        </div>
       </div>
-
     </div>
     <br>
     <div class="row g-3 align-items-center">
       <div class="col-2"> <label for="description">Description:</label>
       </div>
-      <div class="col-3"> <textarea id="description" class="form-control"  name="description" rows="4" required></textarea><br>
+      <div class="col-3">
+        <div class="input-group mb-3">
+          <textarea id="description" class="form-control" [class.is-invalid]="description.invalid && (description.dirty || description.touched)"
+          #description="ngModel" [(ngModel)]="category.description" name="description" rows="4" required></textarea>
+          <div *ngIf="description.invalid && (description.dirty || description.touched)" class="invalid-feedback"> Field is required.
+          </div>
+
+        </div>
       </div>
 
     </div>
     <br>
     <div class="row">
       <div class="offset-3">
-        <button type="button" class="btn btn-success col-1" (click)="onSubmit()"><i
+        <button type="button" class="btn btn-success col-1" [disabled]="addCategoryForm.invalid" (click)="onSubmit()"><i
             class="fa-solid fa-check"></i>Save</button>
-        <button type="button" routerLink="/" class="btn btn-danger col-1"><i
+        <button type="button" routerLink="/categories" class="btn btn-danger col-1"><i
             class="fa-solid fa-xmark"></i>Cancel</button>
       </div>
     </div>

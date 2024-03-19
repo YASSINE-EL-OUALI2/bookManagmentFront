@@ -8,7 +8,7 @@ import { Books } from 'src/app/models/books';
 import { AuthorsService } from 'src/app/services/authors/authors.service';
 import { BooksService } from 'src/app/services/books/books.service';
 import { CategoriesService } from 'src/app/services/categories/categories.service';
-import Swal from 'sweetalert2';
+//import Swal from 'sweetalert2';
 import { formatDate } from '@angular/common';
 import { Inventory } from 'src/app/models/Inventory';
 import { InventoriesService } from 'src/app/services/inventories/inventories.service';
@@ -111,10 +111,8 @@ export class EditBookComponent implements OnInit, OnDestroy {
   }*/
 
   onSubmit() {
-    console.log(this.book);
     if (this.editBookForm.valid) {
-      this.updateSubscription = this.booksServ.updateBook(this.book).subscribe(response => {
-        console.log("updated successfully. ", response);
+      this.updateSubscription = this.booksServ.updateBook(this.book).subscribe(() => {
         this.router.navigateByUrl("/books");
       });
     }

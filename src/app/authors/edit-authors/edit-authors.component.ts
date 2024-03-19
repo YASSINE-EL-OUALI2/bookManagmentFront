@@ -42,8 +42,7 @@ export class EditAuthorsComponent implements OnInit, OnDestroy {
 
 
   onSubmit() {
-    this.updateSubscription = this.authorsServ.updateAuthor(this.author).subscribe(response=>{
-      console.log("author updated" + response);
+    this.updateSubscription = this.authorsServ.updateAuthor(this.author).subscribe(()=>{
       this.router.navigateByUrl("/authors");
     });
   }

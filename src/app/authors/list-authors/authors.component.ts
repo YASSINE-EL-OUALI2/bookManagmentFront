@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { Authors } from 'src/app/models/Authors';
 import { AuthorFilterPipe } from 'src/app/pipes/authors/author-filter.pipe';
 import { AuthorsService } from 'src/app/services/authors/authors.service';
+import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
   selector: 'app-authors',
@@ -15,7 +16,8 @@ export class AuthorsComponent implements OnInit,OnDestroy {
   searchText: string;
   listAuthors: Authors[];
   subscription: Subscription;
-  constructor(private authorsServ: AuthorsService){}
+  constructor(private authorsServ: AuthorsService,
+    protected storageServ: StorageService){}
 
 
   ngOnInit() {

@@ -10,7 +10,7 @@ import { Books } from 'src/app/models/books';
 export class BooksService {
 
 
-  private apiUrl: string = "http://localhost:8080/books";
+  private apiUrl: string = "http://localhost:8080/api/books";
 
   constructor(private http: HttpClient) { }
 

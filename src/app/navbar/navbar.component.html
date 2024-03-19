@@ -1,21 +1,28 @@
-<header class="d-flex justify-content-center py-3">
-  <div class="col-md-3 mb-2 mb-md-0">
+<nav class="navbar navbar-light bg-light">
+  <div class="col-3">
     <a routerLink="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-      <i class="fa-solid fa-book fa-2xl"></i>
+      <span class="navbar-brand mb-0 h1">Book Store</span>
     </a>
   </div>
-  <div class="container">
-    <ul class="nav nav-pills">
-      <!--<li class="nav-item"><a routerLink="/" routerLinkActive="active" class="nav-link">Home</a></li>-->
-      <li class="nav-item"><a routerLink="/books" routerLinkActive="active" class="nav-link">Books</a></li>
-      <li class="nav-item"><a routerLink="/authors" routerLinkActive="active" class="nav-link">Authors</a></li>
-      <li class="nav-item"><a routerLink="/categories" routerLinkActive="active" class="nav-link">Categories</a></li>
-      <li class="nav-item"><a routerLink="/inventories" routerLinkActive="active" class="nav-link">Inventories</a></li>
+  <div class="container col-6 d-flex justify-content-between">
+    <div *ngIf="storageServ.isLoggedIn()">
+      <nav class="nav nav-pills">
+        <ng-container *ngFor="let link of navLinks">
+          <li class="nav-item">
+            <a [routerLink]="link.path" routerLinkActive="active" class="nav-link">{{ link.label }}</a>
+          </li>
+        </ng-container>
+      </nav>
+    </div>
+  </div>
+  <div class="col-auto text-end" *ngIf="storageServ.isLoggedIn()">
+    <ul class="nav nav-pills ml-auto">
+      <li class="nav-item">
+        <a href="/profile" class="nav-link" routerLink="profile">{{ storageServ.getUser().username | uppercase }}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="logout()">Log Out</a>
+      </li>
     </ul>
   </div>
-
-  <div class="col-md-3 text-end">
-    <button type="button" class="btn btn-outline-primary me-2">Login <i class="fa-solid fa-user"></i></button>
-    <button type="button" class="btn btn-primary">Sign-up</button>
-  </div>
-</header>
+</nav>

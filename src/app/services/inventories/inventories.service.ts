@@ -8,7 +8,7 @@ import { Inventory } from 'src/app/models/Inventory';
 })
 export class InventoriesService {
 
-  private apiUrl: string = "http://localhost:8080/inventory";
+  private apiUrl: string = "http://localhost:8080/api/inventory";
 
   constructor(private http: HttpClient) { }
 
@@ -16,7 +16,7 @@ export class InventoriesService {
     return this.http.get<Inventory[]>(this.apiUrl + "/getall");
   }
   findInventoryById(inventoryId: number): Observable<Inventory> {
-    return this.http.get<Inventory>(this.apiUrl + "/getbyid?id=" + inventoryId);
+    return this.http.get<Inventory>(this.apiUrl + "/getitembyid?id=" + inventoryId);
   }
 
   addInventory(inventory: Inventory): Observable<Inventory> {
@@ -28,6 +28,15 @@ export class InventoriesService {
 
     return this.http.post<Inventory>(this.apiUrl + "/additem", inventory, httpOptions);
   }
+  updateInventory(inventory: Inventory): Observable<Inventory> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.put<Inventory>(this.apiUrl + "/updateinventory", inventory, httpOptions);
+  }
+
 
   deleteInventory(inventory: Inventory) {
     const httpOptions = {

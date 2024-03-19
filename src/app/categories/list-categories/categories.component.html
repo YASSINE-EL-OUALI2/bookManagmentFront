@@ -1,5 +1,5 @@
 <h2>Categories List</h2>
-<div class="row">
+<div class="row" *ngIf="storageServ.getRole().includes('ROLE_ADMIN') || storageServ.getRole().includes('ROLE_MODERATOR')">
   <button class="btn btn-primary col-2" routerLink="/addCategory"> Add Category</button>
 </div>
 <br>
@@ -12,7 +12,7 @@
       <th scope="col"></th>
       <th scope="col">Name</th>
       <th scope="col">Description</th>
-      <th scope="col">Actions</th>
+      <th scope="col" *ngIf="storageServ.getRole().includes('ROLE_ADMIN')">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -20,7 +20,7 @@
       <th scope="row">{{i+1}}</th>
       <td>{{item.categoryName}}</td>
       <td>{{item.description}}</td>
-      <td><button class="btn btn-primary" routerLink="/editCategory/{{item.categoryId}}"><i
+      <td *ngIf="storageServ.getRole().includes('ROLE_ADMIN')"><button class="btn btn-primary" routerLink="/editCategory/{{item.categoryId}}"><i
             class="fa-solid fa-pen-to-square" title="Edit"></i></button>
         <button class="btn btn-danger"><i class="fa-solid fa-trash" title="Delete"></i></button>
       </td>
