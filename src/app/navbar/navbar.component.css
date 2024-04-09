@@ -1,1 +1,17 @@
-@import '~@fortawesome/fontawesome-free/css/all.css';
+
+
+.navbar{
+  background-color: rgb(37 42 38 / 44%);
+}
+.navbar-brand{
+  color: #fafcff;
+}
+.nav-pills .nav-link.active{
+  background-color: #fdfa0d5c;
+}
+.nav-link{
+  color:  #fdfa0d5c;
+}
+.title{
+  margin-left: 20px;
+}

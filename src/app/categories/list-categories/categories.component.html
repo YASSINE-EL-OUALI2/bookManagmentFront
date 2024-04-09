@@ -1,29 +1,36 @@
-<h2>Categories List</h2>
-<div class="row" *ngIf="storageServ.getRole().includes('ROLE_ADMIN') || storageServ.getRole().includes('ROLE_MODERATOR')">
-  <button class="btn btn-primary col-2" routerLink="/addCategory"> Add Category</button>
+<div class="card">
+  <div class="card-body">
+    <h2>Categories List</h2>
+    <div class="row"
+      *ngIf="storageServ.getRole().includes('ROLE_ADMIN') || storageServ.getRole().includes('ROLE_MODERATOR')">
+      <button class="btn btn-primary col-2" routerLink="/addCategory"> Add Category</button>
+    </div>
+    <br>
+    <div class="row col-3">
+      <input type="text" [(ngModel)]="searchText" class="form-control" placeholder="Search by Category's name">
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col" *ngIf="storageServ.getRole().includes('ROLE_ADMIN')">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of listCategories | categoryFilter: searchText; let i = index">
+          <th scope="row">{{i+1}}</th>
+          <td>{{item.categoryName}}</td>
+          <td>{{item.description}}</td>
+          <td *ngIf="storageServ.getRole().includes('ROLE_ADMIN')"><button class="btn btn-primary"
+              routerLink="/editCategory/{{item.categoryId}}"><i class="fa-solid fa-pen-to-square"
+                title="Edit"></i></button>
+            <button class="btn btn-danger"><i class="fa-solid fa-trash" title="Delete"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
 </div>
-<br>
-<div class="row col-2">
-  <input type="text" [(ngModel)]="searchText" class="form-control" placeholder="Search by Category's name">
-</div>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col"></th>
-      <th scope="col">Name</th>
-      <th scope="col">Description</th>
-      <th scope="col" *ngIf="storageServ.getRole().includes('ROLE_ADMIN')">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of listCategories | categoryFilter: searchText; let i = index">
-      <th scope="row">{{i+1}}</th>
-      <td>{{item.categoryName}}</td>
-      <td>{{item.description}}</td>
-      <td *ngIf="storageServ.getRole().includes('ROLE_ADMIN')"><button class="btn btn-primary" routerLink="/editCategory/{{item.categoryId}}"><i
-            class="fa-solid fa-pen-to-square" title="Edit"></i></button>
-        <button class="btn btn-danger"><i class="fa-solid fa-trash" title="Delete"></i></button>
-      </td>
-    </tr>
-  </tbody>
-</table>

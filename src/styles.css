@@ -8,4 +8,24 @@
   margin-left: 5px;
 }
 
+button {
+  margin-right: 10px;
+}
+
+body {
+  background-image: url('app/_helpers/images/librarybackgroup.jpg'); /* Specify the path to your image */
+  background-size: cover; /* This property ensures that the image covers the entire background */
+  background-position: center; /* Centers the image horizontally and vertically */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  width: 100%; /* Set width to cover the entire screen */
+  height: 100%; /* Set height to cover the entire screen height */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  color: #fafcff;
+}
+
+.card{
+  --bs-card-bg:#ffffff9e;
+  margin-bottom: 80px;
+}
 

@@ -1,1 +1,16 @@
-<p>profile works!</p>
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+        <h2>User Profile</h2>
+        <!-- Display user profile information -->
+        <div>
+          <p><strong>Username : </strong>{{ storageServ.getUser().username | uppercase }} </p>
+          <p><strong>Email : </strong> {{storageServ.getUser().email}}</p>
+          <p><strong>Joined:</strong> {{storageServ.getUser().createdAt | date : 'MMM d, y, h:mm:ss a'}}</p>
+          <!-- Add more user profile information as needed -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

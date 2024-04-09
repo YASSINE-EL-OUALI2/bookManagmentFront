@@ -1,162 +1,178 @@
-<h2>Edit Book</h2>
+<div class="card">
+  <div class="card-body">
+    <h2>Edit Book</h2>
 
-<div class="container mt-4">
-  <div *ngIf="editBookForm.invalid && (editBookForm.dirty || editBookForm.touched)" class="alert alert-danger">
-    Please correct the errors in the form.
+    <div class="container mt-4">
+      <div *ngIf="editBookForm.invalid && (editBookForm.dirty || editBookForm.touched)" class="alert alert-danger">
+        Please correct the errors in the form.
+      </div>
+      <form #editBookForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="row g-3 align-items-center">
+          <div class="col-2">
+            <label for="title">Title:</label>
+          </div>
+          <div class="col-3">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control"
+                [class.is-invalid]="title.invalid && (title.dirty || title.touched)" id="title" name="title"
+                [(ngModel)]="book.title" #title="ngModel" required>
+              <div *ngIf="title.invalid && (title.dirty || title.touched)" class="invalid-feedback"> Field is required.
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="row g-3 align-items-center">
+          <div class="col-2">
+            <label for="author" class="col-xs-4">Author:</label>
+          </div>
+          <div class="col-3">
+            <div class="input-group mb-3">
+              <select class="form-select" [class.is-invalid]="author.invalid && (author.dirty || author.touched)"
+                #author="ngModel" id="author" name="author" [(ngModel)]="book.author.authorId" required>
+                <option *ngFor="let item of listAuthors" [value]="item.authorId"
+                  [selected]="book.author.authorId == item.authorId">{{item.authorName}}</option>
+              </select>
+              <div *ngIf="author.invalid && (author.dirty || author.touched)" class="invalid-feedback"> Field is
+                required.
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="row g-3 align-items-center">
+          <div class="col-2">
+            <label for="category">Category:</label>
+          </div>
+          <div class="col-3">
+            <div class="input-group mb-3">
+              <select class="form-select" [class.is-invalid]="category.invalid && (category.dirty || category.touched)"
+                #category="ngModel" id="category" name="category" [(ngModel)]="book.category.categoryId" required>
+                <option *ngFor="let item of listCategories" [value]="item.categoryId"
+                  [selected]="book.category.categoryId == item.categoryId">{{item.categoryName}}</option>
+              </select>
+              <div *ngIf="category.invalid && (category.dirty || category.touched)" class="invalid-feedback"> Field is
+                required.</div>
+
+            </div>
+
+          </div>
+        </div>
+        <br>
+        <div class="row g-3 align-items-center">
+          <div class="col-2">
+            <label for="author" class="col-xs-4">Inventory shelf:</label>
+
+          </div>
+          <div class="col-3">
+            <select class="form-select" [class.is-invalid]="inventory.invalid && (inventory.dirty || inventory.touched)"
+              id="inventory" name="inventory" [(ngModel)]="book.inventory.inventoryId" #inventory="ngModel" required>
+              <option *ngFor="let item of ListInventories" [value]="item.inventoryId"
+                [selected]="book.inventory.inventoryId == item.inventoryId">{{item.shelfLocation}}</option>
+            </select>
+            <div *ngIf="inventory.invalid && (inventory.dirty || inventory.touched)" class="invalid-feedback"> Field is
+              required.
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="row g-3 align-items-center">
+          <div class="col-2">
+            <label for="publication_date">Publication Date:</label>
+          </div>
+          <div class="col-3">
+            <div class="input-group mb-3">
+              <input type="date" class="form-control"
+                [class.is-invalid]="publicationdate.invalid && (publicationdate.dirty || publicationdate.touched)"
+                #publicationdate="ngModel" id="publication_date" name="publication_date"
+                [(ngModel)]="book.publicationDate" required>
+              <div *ngIf="publicationdate.invalid && (publicationdate.dirty || publicationdate.touched)"
+                class="invalid-feedback"> Field is required.</div>
+
+            </div>
+          </div>
+        </div>
+        <br>
+
+        <div class="row g-3 align-items-center">
+          <div class="col-2">
+            <label for="isbn">ISBN:</label>
+          </div>
+          <div class="col-3">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" [class.is-invalid]="isbn.invalid && (isbn.dirty || isbn.touched)"
+                #isbn="ngModel" id="isbn" name="isbn" [(ngModel)]="book.isbn" required>
+              <div *ngIf="isbn.invalid && (isbn.dirty || isbn.touched)" class="invalid-feedback"> Field is required.
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <br>
+
+        <div class="row g-3 align-items-center">
+          <div class="col-2">
+            <label for="publisher">Publisher:</label>
+          </div>
+          <div class="col-3">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control"
+                [class.is-invalid]="publishername.invalid && (publishername.dirty || publishername.touched)"
+                #publishername="ngModel" id="publisher" name="publisher" [(ngModel)]="book.publisherName" required>
+              <div *ngIf="publishername.invalid && (publishername.dirty || publishername.touched)"
+                class="invalid-feedback">
+                Field is required.</div>
+
+            </div>
+          </div>
+        </div>
+        <br>
+
+        <div class="row g-3 align-items-center">
+          <div class="col-2">
+            <label for="price">Price:</label>
+          </div>
+          <div class="col-3">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control"
+                [class.is-invalid]="price.invalid && (price.dirty || price.touched)" #price="ngModel" id="price"
+                name="price" [(ngModel)]="book.price" aria-label="Amount (to the nearest dollar)" required>
+              <div *ngIf="price.invalid && (price.dirty || price.touched)" class="invalid-feedback"> Field is required.
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <br>
+
+        <div class="row g-3 align-items-center">
+          <div class="col-2">
+            <label for="availability">Availability:</label>
+          </div>
+          <div class="col-3">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control"
+                [class.is-invalid]="quantity.invalid && (quantity.dirty || quantity.touched)" #quantity="ngModel"
+                id="availability" name="availability" [(ngModel)]="book.quantityAvailable" required>
+              <div *ngIf="quantity.invalid && (quantity.dirty || quantity.touched)" class="invalid-feedback"> Field is
+                required.
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-9 offset-3">
+            <button type="button" routerLink="/books" class="btn btn-danger col-2"><i
+                class="fa-solid fa-xmark"></i>Cancel</button>
+            <button type="button" class="btn btn-success col-2" [disabled]="editBookForm.invalid"
+              (click)="onSubmit()"><i class="fa-solid fa-check"></i>Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
   </div>
-  <form #editBookForm="ngForm" (ngSubmit)="onSubmit()">
-    <div class="row g-3 align-items-center">
-      <div class="col-2">
-        <label for="title">Title:</label>
-      </div>
-      <div class="col-3">
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" [class.is-invalid]="title.invalid && (title.dirty || title.touched)"
-            id="title" name="title" [(ngModel)]="book.title" #title="ngModel" required>
-          <div *ngIf="title.invalid && (title.dirty || title.touched)" class="invalid-feedback"> Field is required.
-          </div>
-        </div>
-      </div>
-    </div>
-    <br>
-    <div class="row g-3 align-items-center">
-      <div class="col-2">
-        <label for="author" class="col-xs-4">Author:</label>
-      </div>
-      <div class="col-3">
-        <div class="input-group mb-3">
-          <select class="form-select" [class.is-invalid]="author.invalid && (author.dirty || author.touched)"
-            #author="ngModel" id="author" name="author" [(ngModel)]="book.author.authorId" required>
-            <option *ngFor="let item of listAuthors" [value]="item.authorId"
-              [selected]="book.author.authorId == item.authorId">{{item.authorName}}</option>
-          </select>
-          <div *ngIf="author.invalid && (author.dirty || author.touched)" class="invalid-feedback"> Field is required.
-          </div>
-
-        </div>
-      </div>
-    </div>
-    <br>
-    <div class="row g-3 align-items-center">
-      <div class="col-2">
-        <label for="category">Category:</label>
-      </div>
-      <div class="col-3">
-        <div class="input-group mb-3">
-          <select class="form-select" [class.is-invalid]="category.invalid && (category.dirty || category.touched)"
-            #category="ngModel" id="category" name="category" [(ngModel)]="book.category.categoryId" required>
-            <option *ngFor="let item of listCategories" [value]="item.categoryId"
-              [selected]="book.category.categoryId == item.categoryId">{{item.categoryName}}</option>
-          </select>
-          <div *ngIf="category.invalid && (category.dirty || category.touched)" class="invalid-feedback"> Field is
-            required.</div>
-
-        </div>
-
-      </div>
-    </div>
-    <br>
-    <div class="row g-3 align-items-center">
-      <div class="col-2">
-        <label for="author" class="col-xs-4">Inventory shelf:</label>
-
-      </div>
-      <div class="col-3">
-        <select class="form-select" [class.is-invalid]="inventory.invalid && (inventory.dirty || inventory.touched)" id="inventory"
-          name="inventory" [(ngModel)]="book.inventory.inventoryId" #inventory="ngModel" required>
-          <option *ngFor="let item of ListInventories" [value]="item.inventoryId"
-            [selected]="book.inventory.inventoryId == item.inventoryId">{{item.shelfLocation}}</option>
-        </select>
-        <div *ngIf="inventory.invalid && (inventory.dirty || inventory.touched)" class="invalid-feedback"> Field is required.
-        </div>
-      </div>
-    </div>
-    <br>
-    <div class="row g-3 align-items-center">
-      <div class="col-2">
-        <label for="publication_date">Publication Date:</label>
-      </div>
-      <div class="col-3">
-        <div class="input-group mb-3">
-          <input type="date" class="form-control" [class.is-invalid]="publicationdate.invalid && (publicationdate.dirty || publicationdate.touched)" #publicationdate="ngModel"
-           id="publication_date" name="publication_date" [(ngModel)]="book.publicationDate" required>
-            <div *ngIf="publicationdate.invalid && (publicationdate.dirty || publicationdate.touched)"
-            class="invalid-feedback"> Field is required.</div>
-
-        </div>
-      </div>
-    </div>
-    <br>
-
-    <div class="row g-3 align-items-center">
-      <div class="col-2">
-        <label for="isbn">ISBN:</label>
-      </div>
-      <div class="col-3">
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" [class.is-invalid]="isbn.invalid && (isbn.dirty || isbn.touched)" #isbn="ngModel"
-           id="isbn" name="isbn" [(ngModel)]="book.isbn" required>
-           <div *ngIf="isbn.invalid && (isbn.dirty || isbn.touched)" class="invalid-feedback"> Field is required.</div>
-
-        </div>
-      </div>
-    </div>
-    <br>
-
-    <div class="row g-3 align-items-center">
-      <div class="col-2">
-        <label for="publisher">Publisher:</label>
-      </div>
-      <div class="col-3">
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" [class.is-invalid]="publishername.invalid && (publishername.dirty || publishername.touched)" #publishername="ngModel"
-           id="publisher" name="publisher" [(ngModel)]="book.publisherName" required>
-           <div *ngIf="publishername.invalid && (publishername.dirty || publishername.touched)" class="invalid-feedback">
-            Field is required.</div>
-
-        </div>
-      </div>
-    </div>
-    <br>
-
-    <div class="row g-3 align-items-center">
-      <div class="col-2">
-        <label for="price">Price:</label>
-      </div>
-      <div class="col-3">
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" [class.is-invalid]="price.invalid && (price.dirty || price.touched)" #price="ngModel"
-           id="price" name="price" [(ngModel)]="book.price" aria-label="Amount (to the nearest dollar)" required>
-           <div *ngIf="price.invalid && (price.dirty || price.touched)" class="invalid-feedback"> Field is required.
-          </div>
-
-        </div>
-      </div>
-    </div>
-    <br>
-
-    <div class="row g-3 align-items-center">
-      <div class="col-2">
-        <label for="availability">Availability:</label>
-      </div>
-      <div class="col-3">
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" [class.is-invalid]="quantity.invalid && (quantity.dirty || quantity.touched)" #quantity="ngModel"
-           id="availability" name="availability" [(ngModel)]="book.quantityAvailable" required>
-           <div *ngIf="quantity.invalid && (quantity.dirty || quantity.touched)" class="invalid-feedback"> Field is required.
-          </div>
-
-        </div>
-      </div>
-    </div>
-    <br>
-    <div class="row">
-      <div class="offset-3">
-        <button type="button" class="btn btn-success col-1" [disabled]="editBookForm.invalid" (click)="onSubmit()"><i
-            class="fa-solid fa-check"></i>Save</button>
-        <button type="button" routerLink="/books" class="btn btn-danger col-1"><i
-            class="fa-solid fa-xmark"></i>Cancel</button>
-      </div>
-    </div>
-  </form>
 </div>

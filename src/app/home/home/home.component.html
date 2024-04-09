@@ -1,24 +1,18 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-6">
-      <h2>User Profile</h2>
-      <!-- Display user profile information -->
-      <div>
-        <p><strong>Username : </strong>{{ storageServ.getUser().username | uppercase }} </p>
-        <p><strong>Email : </strong> {{storageServ.getUser().Email}}</p>
-        <p><strong>Joined:</strong> January 1, 2022</p>
-        <!-- Add more user profile information as needed -->
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="text-center">
+        <h2>Welcome to Book Store</h2>
+        <p>This application allows you to manage your book collection effectively.</p>
       </div>
+      <p>Your actions may vary depending on your role:</p>
+      <ul>
+        <li><strong>User :</strong> View and search books in the collection.</li>
+        <li><strong>Moderator :</strong> Add & edit books in the collection.</li>
+        <li><strong>Administrator :</strong> Manage user roles and permissions, in addition to full book management.</li>
+      </ul>
     </div>
-    <div class="col-md-6">
-      <h2>Recent Activity</h2>
-      <!-- Display user's recent activity -->
-      <div>
-        <!-- Example activity item -->
-        <p><strong>February 15, 2024:</strong> Added "Book Title" to favorites</p>
-        <!-- Repeat for other recent activities -->
-      </div>
-    </div>
+
   </div>
 
 </div>

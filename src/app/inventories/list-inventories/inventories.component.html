@@ -1,31 +1,40 @@
-<h2>Inventories List</h2>
-<div class="row" *ngIf="storageServ.getRole().includes('ROLE_ADMIN') || storageServ.getRole().includes('ROLE_MODERATOR')">
-  <button class="btn btn-primary col-2" routerLink="/addInventory"> Add Inventory</button>
+<div class="card">
+  <div class="card-body">
+    <h2>Inventories List</h2>
+    <div class="row"
+      *ngIf="storageServ.getRole().includes('ROLE_ADMIN') || storageServ.getRole().includes('ROLE_MODERATOR')">
+      <button class="btn btn-primary col-2" routerLink="/addInventory"> Add Inventory</button>
+    </div>
+    <br>
+    <div class="row col-3">
+      <input type="text" [(ngModel)]="searchText" class="form-control"
+        placeholder="Search by Inventory's shelf location">
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Shelf Location</th>
+          <th scope="col">Condition</th>
+          <th scope="col">Date Added</th>
+          <th scope="col" *ngIf="storageServ.getRole().includes('ROLE_ADMIN')">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of listInventories | inventoryFilter: searchText; let i = index">
+          <th scope="row">{{i+1}}</th>
+          <td>{{item.shelfLocation}}</td>
+          <td>{{item.condition}}</td>
+          <td>{{item.dateAdded | date:"yyyy-MM-dd"}}</td>
+          <td *ngIf="storageServ.getRole().includes('ROLE_ADMIN')"><button class="btn btn-primary"
+              routerLink="/editInventory/{{item.inventoryId}}"><i class="fa-solid fa-pen-to-square"
+                title="Edit"></i></button>
+            <button class="btn btn-danger" (click)="deleteInventory(item.inventoryId)"><i class="fa-solid fa-trash"
+                title="Delete"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
 </div>
-<br>
-<div class="row col-3">
-  <input type="text" [(ngModel)]="searchText" class="form-control" placeholder="Search by Inventory's shelf location">
-</div>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col"></th>
-      <th scope="col">Shelf Location</th>
-      <th scope="col">Condition</th>
-      <th scope="col">Date Added</th>
-      <th scope="col" *ngIf="storageServ.getRole().includes('ROLE_ADMIN')">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of listInventories | inventoryFilter: searchText; let i = index">
-      <th scope="row">{{i+1}}</th>
-      <td>{{item.shelfLocation}}</td>
-      <td>{{item.condition}}</td>
-      <td>{{item.dateAdded | date:"yyyy-MM-dd"}}</td>
-      <td *ngIf="storageServ.getRole().includes('ROLE_ADMIN')"><button class="btn btn-primary" routerLink="/editInventory/{{item.inventoryId}}"><i
-            class="fa-solid fa-pen-to-square" title="Edit"></i></button>
-        <button class="btn btn-danger" (click)="deleteInventory(item.inventoryId)"><i class="fa-solid fa-trash" title="Delete"></i></button>
-      </td>
-    </tr>
-  </tbody>
-</table>
